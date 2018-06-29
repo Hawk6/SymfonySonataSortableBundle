@@ -1,0 +1,35 @@
+{% if is_last_position(object) %}
+    <a class="btn btn-sm btn-default js-btn-actions" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="Move down">
+        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+    </a>
+{% endif %}
+
+{% if object.position > 1 %}
+    <a class="btn btn-sm btn-default js-btn-actions" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="Move up">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+{% endif %}
+
+{% if object.enabled is defined %}
+    {% if object.enabled == true %}
+        <a class="btn btn-sm btn-default js-btn-actions" href="{{ admin.generateObjectUrl('disable', object) }}" title="Disable">
+            <i class="fa fa-power-off" aria-hidden="true"></i> Disable
+        </a>
+    {% else %}
+        <a class="btn btn-sm btn-default js-btn-actions" href="{{ admin.generateObjectUrl('enable', object) }}" title="Enable">
+            <i class="fa fa-check" aria-hidden="true"></i> Enable
+        </a>
+    {% endif %}
+{% endif %}
+
+<a class="btn btn-sm btn-default js-btn-actions" href="{{ admin.generateObjectUrl('remove', object) }}" title="Remove">
+    <i class="fa fa-times" aria-hidden="true"></i>
+</a>
+
+<script>
+    $(document).on('click', '.js-btn-actions', function () {
+        $('.js-btn-actions').each(function () {
+            $(this).addClass('disabled');
+        });
+    });
+</script>

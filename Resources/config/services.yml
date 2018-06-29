@@ -1,0 +1,14 @@
+services:
+    hawk6.sortable.admin.list.position_handler:
+        class: Hawk6\Bundle\SonataSortableBundle\Services\PositionHandler
+        calls:
+            - [ setEntityManager, ["@doctrine.orm.default_entity_manager"]]
+            - [ setAnnotationReader, ["@annotation_reader"]]
+
+    hawk6.sortable.twig_extension_position:
+        class: Hawk6\Bundle\SonataSortableBundle\Twig\PositionExtension
+        public: false
+        calls:
+            - [ setPositionHandler, ["@hawk6.sortable.admin.list.position_handler"]]
+        tags:
+            - { name: twig.extension }

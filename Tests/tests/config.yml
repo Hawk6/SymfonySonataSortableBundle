@@ -1,0 +1,48 @@
+framework:
+    secret: test
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    session:
+        storage_id: session.storage.mock_file
+    templating:
+        engines: ['twig']
+
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        proxy_dir: "%kernel.cache_dir%/doctrine/orm/Proxies"
+        auto_mapping: true
+        mappings:
+            AppBundle: #Different mapping place for tests
+                type: yml
+                dir: '%kernel.root_dir%/Tests/Resource/config/doctrine'
+        metadata_cache_driver:
+            type: service
+            id: doctrine_cache.providers.doctrine.metadata.cache
+        query_cache_driver:
+            type: service
+            id: doctrine_cache.providers.doctrine.query.cache
+        result_cache_driver:
+            type: service
+            id: doctrine_cache.providers.doctrine.result.cache
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+
+doctrine_cache:
+    providers:
+        validator.mapping.cache:
+            array: ~
+        annotations.cache:
+            array: ~
+        doctrine.metadata.cache:
+            array: ~
+        doctrine.query.cache:
+            array: ~
+        doctrine.result.cache:
+            array: ~

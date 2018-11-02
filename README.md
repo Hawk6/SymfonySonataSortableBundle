@@ -114,6 +114,19 @@ and have to use Trait methods in configureListFields and configureRoutes (if you
         $this->configureListFieldsTrait($listMapper);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove(....
+        
+        ...
+        
+        
+        $this->configureRoutesTrait($collection);
+    }
+
 
 
 
